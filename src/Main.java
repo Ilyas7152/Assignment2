@@ -7,7 +7,7 @@ class Main {
     static Scanner scanner = new Scanner(System.in);
     static LinkedList<BankAccount> accounts;
     static Queue<BankAccount> accountRequests= new LinkedList<>();
-
+//assik
     public static void main(String[] args) {
 
         account[0]=new BankAccount("1","Ilya",5000000);
