@@ -15,70 +15,27 @@ class Main {
         account[2]=new BankAccount("3","Ilyas",500000000);
         accounts= new LinkedList<>(Arrays.asList(account));
         while (true) {
-            System.out.println("1.ADD NEW ACCOUNT");
-            System.out.println("2.Display all");
-            System.out.println("3.Search by username");
+            System.out.println("1.Bank");
+            System.out.println("2.ATM");
+            System.out.println("3.ADMIN AREA");
             System.out.println("4.Exit");
-            System.out.println("5. Deposit money");
-            System.out.println("6.Withdraw money");
-            System.out.println("7.Undo");
-            System.out.println("8.Last transaction:");
-            System.out.println("9.Add bill payment");
-            System.out.println("10.Process bill payment");
-            System.out.println("11.Display remained");
-            System.out.println("12.Approvement from admin");
-            System.out.println("13.Display pending requests");
-
             int choice = scanner.nextInt();
             scanner.nextLine();
-
             switch (choice) {
                 case 1:
-                 addAccount();
-                 break;
+                BankMenu();
+                break;
                 case 2:
-                   displayInfo();
-                    break;
+                   AtmMenu();
                 case 3:
-               searchUser();
-               break;
+                    AdminMenu();
+                    break;
+
                 case 4:
-                    System.exit(0);
-                case 5:
-                    depositMoney();
-                    break;
+                    return;
 
-                case 6:
-                  withdrawMoney();
-                    break;
-                case 7:
-                    undoTrans();
-                    break;
-                case 8:
-                 lastTrans();
-                    break;
-                case 9:
-                   addBill();
-                    break;
-
-                case 10:
-              processBillPayment();
-                    break;
-
-                case 11:
-                    remainedBills();
                 default:
                     System.out.println("Invalid option.");
-
-                    break;
-                case 12:
-                approvementFromAdmin();
-                    break;
-                    case 13:
-                    displayRemained();
-                    break;
-
-
             }
         }
     }
@@ -86,7 +43,7 @@ class Main {
         System.out.println("Enter username");
         String username = scanner.nextLine();
         accountRequests.add(new BankAccount("?", username, 0.0));
-        System.out.println("Request submitted");
+        System.out.println("Request submitted now you need to contact with the admin to approve account");
 
     }
     public static void displayInfo(){
@@ -112,6 +69,7 @@ class Main {
         String depositUser = scanner.nextLine();
         for (BankAccount acc : accounts) {
             if (acc.username.equalsIgnoreCase(depositUser)) {
+                System.out.println("Enter amount");
                 double amount = scanner.nextDouble();
                 scanner.nextLine();
                 acc.balance += amount;
@@ -123,8 +81,10 @@ class Main {
     }
     public static  void withdrawMoney(){
         String withdrawUser = scanner.nextLine();
+        System.out.println("Enter username");
         for (BankAccount acc : accounts) {
             if (acc.username.equalsIgnoreCase(withdrawUser)) {
+                System.out.println("Enter amount");
                 double amount = scanner.nextDouble();
                 scanner.nextLine();
                 if (acc.balance >= amount) {
@@ -190,4 +150,97 @@ class Main {
     public static void displayRemained(){
         System.out.println("Pending requests" + accountRequests);
     }
-}
+    public static void BankMenu(){
+        while(true) {
+            System.out.println("Choose a function");
+
+            System.out.println("1.Add account");
+            System.out.println("2.Deposit money");
+            System.out.println("3.Withdraw money");
+            System.out.println("4.Show last transaction");
+            System.out.println("5.Undo transaction");
+            System.out.println("6.Exit");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice) {
+                case 1:
+                    addAccount();
+                    break;
+                case 2:
+                    depositMoney();
+                    break;
+                case 3:
+                    withdrawMoney();
+                    break;
+                case 4:
+                    lastTrans();
+                    break;
+                case 5:
+                    undoTrans();
+                    break;
+
+                default:
+                    System.out.println("Invalid option");
+                case 6:
+                    return;
+            }
+        }
+    }
+    public static void AtmMenu(){
+        while(true){
+        System.out.println("Choose a function");
+        System.out.println("1.Add bill payment");
+        System.out.println("2.Process bill payment");
+        System.out.println("3.Display balance");
+            System.out.println("4.Exit");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+        switch(choice) {
+            case 1:
+                addBill();
+                break;
+            case 2:
+                processBillPayment();
+                break;
+            case 3:
+                displayInfo();
+                break;
+
+            default:
+                System.out.println("Invalid option");
+            case 4:
+                return;
+
+        }
+        }
+    }
+    public static void AdminMenu(){
+       while(true){
+        System.out.println("Choose a function");
+
+        System.out.println("1.Approvement from admin");
+        System.out.println("2.Remained bill payment");
+        System.out.println("3.Display pending requests;");
+        System.out.println("4.Search user by name");
+           System.out.println("5.Exit");
+           int choice = scanner.nextInt();
+           scanner.nextLine();
+        switch(choice){
+            case 1:
+                approvementFromAdmin();
+                break;
+            case 2:
+                remainedBills();
+                break;
+            case 3:
+                displayRemained();
+             break;
+            case 4:
+                searchUser();
+                break;
+            default: System.out.println("Invalid option");
+            case 5:
+                return;
+        }
+    }
+}}
